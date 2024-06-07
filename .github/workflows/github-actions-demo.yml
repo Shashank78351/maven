@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Linuxvm
 
     steps:
     - name: Checkout code
@@ -47,6 +47,28 @@ jobs:
         IMAGE_TAG=${GITHUB_SHA}
         docker build . --file Dockerfile --tag $IMAGE_NAME:$IMAGE_TAG --label "runnumber=${GITHUB_RUN_ID}"
         docker push $IMAGE_NAME:$IMAGE_TAG
+    
+    
+    - name: Checkout GitOps repo
+      uses: actions/checkout@v3
+      with:
+        repository: <your-gitops-repo>
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: gitops
+
+    - name: Update Kubernetes manifests
+      run: |
+        cd gitops
+        sed -i "s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" path/to/your/deployment.yaml
+
+    - name: Commit and push changes
+      run: |
+        cd gitops
+        git config --global user.email "shashankmr170@gmail.com"
+        git config --global user.name "smr123"
+        git add .
+        git commit -m "Update image to ${IMAGE_NAME}:${IMAGE_TAG}"
+        git push    
       
           
       
