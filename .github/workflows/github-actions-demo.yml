@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: Linuxvm
+    runs-on: self-hosted
+    runs-on: [self-hosted, Linuxvm]
 
     steps:
     - name: Checkout code
