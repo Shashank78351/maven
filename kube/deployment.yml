@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: maven
-        image: smr123/maven:63
+        image: smr123/maven:64
         ports:
         - containerPort: 8092
       imagePullSecrets:
