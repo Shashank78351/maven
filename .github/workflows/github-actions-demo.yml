@@ -44,7 +44,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         IMAGE_NAME=smr123/maven
-        IMAGE_TAG=${GITHUB_SHA}
+        IMAGE_TAG=${GITHUB_RUN_NUMBER}
         docker build . --file Dockerfile --tag $IMAGE_NAME:$IMAGE_TAG --label "runnumber=${GITHUB_RUN_ID}"
         docker push $IMAGE_NAME:$IMAGE_TAG
     
@@ -52,7 +52,7 @@ jobs:
     - name: Checkout GitOps repo
       uses: actions/checkout@v3
       with:
-        repository: <your-gitops-repo>
+        repository: https://github.com/Shashank78351/maven.git
         token: ${{ secrets.TOKEN }}
         path: gitops
 
