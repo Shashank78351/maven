@@ -65,7 +65,6 @@ jobs:
           sed -i "s+$IMAGE_NAME:$IMAGE_TAG.*+$IMAGE_NAME:$IMAGE_TAG+g" kube/deployment.yml
           git add .
           git commit -m "Done by Github Actions Job changemanifest: $IMAGE_TAG"
-          git push origin main
-      
+          git push origin master      
           
       
