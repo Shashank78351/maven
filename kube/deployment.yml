@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: webapp
-  name: webapp-deployment
+  namespace: maven-app
+  name: maven-deployment
   labels:
-    app: webapp
+    app: maven
 spec:
   replicas: 
   selector:
     matchLabels:
-      app: webapp
+      app: maven
   template:
     metadata:
       labels:
-        app: webapp
+        app: maven
     spec:
       containers:
-      - name: webapp
-        image: smr123/sample-web:111
+      - name: maven
+        image: smr123/maven:17
         ports:
-        - containerPort: 8090
+        - containerPort: 8092
       imagePullSecrets:
-      - name: my-secret-todo
+      - name: docker-credentials

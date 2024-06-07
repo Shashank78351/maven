@@ -52,14 +52,14 @@ jobs:
     - name: Checkout GitOps repo
       uses: actions/checkout@v3
       with:
-        repository: https://github.com/Shashank78351/maven.git
+        repository: Shashank78351/maven
         token: ${{ secrets.TOKEN }}
         path: gitops
 
     - name: Update Kubernetes manifests
       run: |
         cd gitops
-        sed -i "s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" path/to/your/deployment.yaml
+        sed -i "s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" kube/deployment.yaml
 
     - name: Commit and push changes
       run: |
