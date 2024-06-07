@@ -59,6 +59,7 @@ jobs:
     - name: Update Kubernetes manifests
       run: |
         cd gitops
+        ls -la 
         sed -i "s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" kube/deployment.yaml
 
     - name: Commit and push changes
