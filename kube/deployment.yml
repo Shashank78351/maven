@@ -1,24 +1,24 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion:
+kind:
 metadata:
-  namespace: maven-app
-  name: maven-deployment
+  namespace:
+  name:
   labels:
-    app: maven
+    app:
 spec:
-  replicas: 
+  replicas:
   selector:
     matchLabels:
-      app: maven
+      app:
   template:
     metadata:
       labels:
-        app: maven
+        app:
     spec:
       containers:
-      - name: maven
-        image: smr123/maven:23
+      - name:
+        image:
         ports:
-        - containerPort: 8092
+        - containerPort:
       imagePullSecrets:
-      - name: docker-credentials
+      - name:
