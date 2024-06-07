@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    runs-on: [self-hosted, Linuxvm]
+    runs-on: [self-hosted, linux-1]
 
     steps:
     - name: Checkout code
