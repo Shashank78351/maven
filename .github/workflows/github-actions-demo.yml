@@ -55,17 +55,13 @@ jobs:
           repository: 'Shashank78351/maven'
           token: ${{ secrets.TOKEN }}
 
-    - name: update the image
+    - name: Update deployment YAML
       run: |
-          git config user.email shashankmr170@gmail.com
-          git config user.name smr123
-          pwd
-          cat kube/deployment.yml
-          pwd
-          sed -i "s+$IMAGE_NAME.*+$IMAGE_NAME:$IMAGE_TAG+g" kube/deployment.yml
-          git add .
-          git commit -m "Done by Github Actions Job changemanifest: $IMAGE_TAG"
-          git push origin master
+            sed -i "s+image:.*+image: $IMAGE_NAME:$IMAGE_TAG+g" kube/deployment.yml
+  
+    - name: Check for changes
+      run: |
+            git diff --exit-code --quiet || (git commit -am "Update image to $IMAGE_NAME:$IMAGE_TAG" && git push origin master)
              
           
       
