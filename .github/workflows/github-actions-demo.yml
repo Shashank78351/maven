@@ -48,23 +48,22 @@ jobs:
         docker build . --file Dockerfile --tag $IMAGE_NAME:$IMAGE_TAG --label "runnumber=${GITHUB_RUN_ID}"
         docker push $IMAGE_NAME:$IMAGE_TAG
     
-    
-    - name: changing the deployment of git repo
-      uses: actions/checkout@v3
-      with:
-          repository: 'Shashank78351/maven'
+  update-manifest:
+    runs-on: [self-hosted, linux-1]
+    needs: ['build']
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: Shashank78351/maven
+          ref: 'master'
           token: ${{ secrets.TOKEN }}
-
-    - name: Update deployment YAML
-      run: |
-            sed -i "s+image:.*+image: $IMAGE_NAME:$IMAGE_TAG+g" kube/deployment.yml
-  
-    - name: Check for changes and commit if necessary
-      run: |
-            echo "IMAGE_NAME: $IMAGE_NAME"
-            echo "IMAGE_TAG: $IMAGE_TAG"
-            git diff --exit-code --quiet || (git commit -am "Update image to $IMAGE_NAME:$IMAGE_TAG" && git push origin master)
-          
-             
-          
-      
+      - name: setup git config
+        run: |
+          git config --global user.email "shashankmr170@gmail.com"
+          git config --global user.name "Shashank78351"
+          echo ${{ github.sha }}
+          sed -i "s#$IMAGE_NAME.*#$IMAGE_NAME:$IMAGE_TAG#g" kube/deployment.yml
+          git add -A
+          git commit -am "Update image for - $IMAGE_TAG"
+      - run: echo ${{ github }}
+      - run: git push origin master
