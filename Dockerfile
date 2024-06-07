@@ -1,10 +1,15 @@
-FROM openjdk:8-jdk-alpine as build
-COPY . /usr/app
-WORKDIR /usr/app
-RUN chmod +x mvnw && ./mvnw clean package
+FROM maven:3-jdk-8-alpine as builder
+
+WORKDIR /usr/src/app
+
+COPY . /usr/src/app
+RUN mvn package
 
 FROM openjdk:8-jre-alpine
-COPY --from=build /usr/app/target/*.jar app.jar
-EXPOSE 8383
 
-ENTRYPOINT ["java","-jar","app.jar"]
+COPY --from=builder /usr/src/app/target/*.jar /app.jar
+
+EXPOSE 8090
+
+ENTRYPOINT ["java"]
+CMD ["-jar", "/app.jar"]
