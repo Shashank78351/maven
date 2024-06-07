@@ -49,27 +49,24 @@ jobs:
         docker push $IMAGE_NAME:$IMAGE_TAG
     
     
-    - name: Checkout GitOps repo
+    - name: changing the deployment of git repo
       uses: actions/checkout@v3
       with:
-        repository: Shashank78351/maven
-        token: ${{ secrets.TOKEN }}
-        path: gitops
+          repository: 'Shashank78351/maven'
+          token: ${{ secrets.TOKEN }}
 
-    - name: Update Kubernetes manifests
+    - name: update the image
       run: |
-        cd gitops
-        ls -la 
-        sed -i "s|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" kube/deployment.yml
-
-    - name: Commit and push changes
-      run: |
-        cd gitops
-        git config --global user.email "shashankmr170@gmail.com"
-        git config --global user.name "smr123"
-        git add .
-        git commit -m "Update image to ${IMAGE_NAME}:${IMAGE_TAG}"
-        git push    
+          git config user.email shashankmr170@gmail.com
+          git config user.name smr123
+          pwd
+          cat kube/deployment.yaml
+          pwd
+          sed -i "s+$IMAGE_NAME:$IMAGE_TAG.*+$IMAGE_NAME:$IMAGE_TAG+g" kube/deployment.yaml
+          cat deployment.yaml
+          git add .
+          git commit -m 'Done  by Github Actions   Job changemanifest: $IMAGE_TAG'
+          git push origin main
       
           
       
