@@ -57,13 +57,20 @@ jobs:
           repository: Shashank78351/maven
           ref: 'master'
           token: ${{ secrets.TOKEN }}
-      - name: setup git config
+      - name: Set up Git config
         run: |
-          git config --global user.email "shashankmr170@gmail.com"
-          git config --global user.name "Shashank78351"
-          echo ${{ github.sha }}
-          sed -i "s#$IMAGE_NAME.*#$IMAGE_NAME:$IMAGE_TAG#g" kube/deployment.yml
-          git add -A
-          git commit -am "Update image for - $IMAGE_TAG"
-      - run: echo ${{ github }}
-      - run: git push origin master
+            git config --global user.email "shashankmr170@gmail.com"
+            git config --global user.name "Shashank78351"
+    
+      - name: Update deployment YAML
+        run: |
+            sed -i "s#${{ needs.build.outputs.IMAGE_NAME }}.*#${{ needs.build.outputs.IMAGE_NAME }}:${{ needs.build.outputs.IMAGE_TAG }}#g" kube/deployment.yml
+    
+      - name: Add changes and commit
+        run: |
+            git add kube/deployment.yml
+            git commit -m "Update image to ${{ needs.build.outputs.IMAGE_NAME }}:${{ needs.build.outputs.IMAGE_TAG }}"
+    
+      - name: Push changes to repository
+        run: |
+            git push origin master
