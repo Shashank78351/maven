@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, linux-1]
+    runs-on: [self-hosted, window-1]
 
     steps:
     - name: Checkout code
