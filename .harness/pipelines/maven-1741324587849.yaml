@@ -37,6 +37,13 @@ pipeline:
                       - latest
                   timeout: ""
                   type: BuildAndPushDockerRegistry
+              - step:
+                  identifier: mavenbuild
+                  name: maven
+                  spec:
+                    command: mvn test
+                  timeout: ""
+                  type: Run
           platform:
             arch: Amd64
             os: Linux
