@@ -31,7 +31,7 @@ pipeline:
                   name: docker_build
                   spec:
                     caching: true
-                    connectorRef: account.docker
+                    connectorRef: docker
                     repo: hello/world
                     tags:
                       - latest
