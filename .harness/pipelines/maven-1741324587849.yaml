@@ -27,21 +27,10 @@ pipeline:
                   timeout: ""
                   type: Run
               - step:
-                  identifier: dockerbuild
-                  name: docker_build
-                  spec:
-                    caching: true
-                    connectorRef: docker
-                    repo: smr1234/hello
-                    tags:
-                      - latest
-                  timeout: ""
-                  type: BuildAndPushDockerRegistry
-              - step:
                   identifier: mavenbuild
                   name: maven
                   spec:
-                    command: mvn test
+                    command: echo $PATH
                   timeout: ""
                   type: Run
           platform:
