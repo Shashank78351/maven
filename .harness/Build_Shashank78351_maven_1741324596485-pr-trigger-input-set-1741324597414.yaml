@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Shashank78351_maven_1741324596485-pr-trigger-input-set
+  identifier: Build_Shashank78351_maven_1741324596485prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_Shashank78351_maven_1741324596485
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
