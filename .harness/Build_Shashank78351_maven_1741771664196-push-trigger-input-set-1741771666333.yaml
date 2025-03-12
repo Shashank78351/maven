@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Shashank78351_maven_1741771664196-push-trigger-input-set
+  identifier: Build_Shashank78351_maven_1741771664196pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Devopsnow
+  pipeline:
+    identifier: Build_Shashank78351_maven_1741771664196
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
