@@ -8,7 +8,7 @@ pipeline:
     ci:
       codebase:
         connectorRef: account.Github_OAuth_1741324575330
-        repoName: maven
+        repoName: Shashank78351/maven
         build: <+input>
   stages:
     - stage:
