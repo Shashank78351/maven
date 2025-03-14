@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: AKS_Linux
+  identifier: AKS_Linux
+  orgIdentifier: default
+  projectIdentifier: Devopsnow
+  environmentRef: dev
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: AKS
+    namespace: maven-app
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
