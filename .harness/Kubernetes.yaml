@@ -1,0 +1,5 @@
+service:
+  name: Kubernetes
+  identifier: Kubernetes
+  orgIdentifier: default
+  projectIdentifier: Devopsnow
