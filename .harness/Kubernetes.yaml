@@ -3,3 +3,24 @@ service:
   identifier: Kubernetes
   orgIdentifier: default
   projectIdentifier: Devopsnow
+  serviceDefinition:
+    spec:
+      manifests:
+        - manifest:
+            identifier: maven
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.Github_OAuth_1741324575330
+                  gitFetchType: Branch
+                  paths:
+                    - kube/deployment.yml
+                    - kube/service.yml
+                    - kube/secret.yml
+                  repoName: Shashank78351/maven
+                  branch: master
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+    type: Kubernetes
