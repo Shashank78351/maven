@@ -1,0 +1,5 @@
+service:
+  name: AKS_sevice
+  identifier: AKS_sevice
+  orgIdentifier: default
+  projectIdentifier: Devopsnow
