@@ -19,8 +19,8 @@ service:
                     - kube/deployment.yml
                     - kube/service.yml
                     - kube/secret.yml
-                  repoName: Shashank78351/maven
-                  branch: master
+                  repoName: Shashank78351/todo-app
+                  branch: main
               skipResourceVersioning: false
               enableDeclarativeRollback: false
       artifacts:
@@ -30,7 +30,7 @@ service:
             - spec:
                 connectorRef: docker
                 imagePath: smr1234/maven
-                tag: <+input>
+                tag: <+input>.allowedValues(latest)
                 digest: ""
               identifier: dockerhub
               type: DockerRegistry
