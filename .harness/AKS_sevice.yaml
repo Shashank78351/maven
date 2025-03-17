@@ -19,8 +19,8 @@ service:
                     - kube/deployment.yml
                     - kube/service.yml
                     - kube/secret.yml
-                  repoName: Shashank78351/todo-app
-                  branch: main
+                  repoName: Shashank78351/maven
+                  branch: master
               skipResourceVersioning: false
               enableDeclarativeRollback: false
       artifacts:
