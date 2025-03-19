@@ -39,6 +39,44 @@ pipeline:
                       - latest
                     caching: true
     - stage:
+        name: test
+        identifier: test
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: AKS
+              namespace: maven-app
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: AquaTrivy
+                  name: AquaTrivy_1
+                  identifier: AquaTrivy_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: container
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+                    privileged: true
+                    imagePullPolicy: Always
+                    connectorRef: docker
+                    imageTag: latest
+                    image:
+                      type: docker_v2
+                      tag: latest
+                      name: smr1234/maven
+                      domain: https://index.docker.io/v1/
+    - stage:
         name: deploy
         identifier: deploy
         description: ""
