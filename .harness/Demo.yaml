@@ -50,6 +50,7 @@ pipeline:
             spec:
               connectorRef: AKS
               namespace: maven-app
+              automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
           execution:
@@ -75,7 +76,6 @@ pipeline:
                       type: docker_v2
                       tag: latest
                       name: smr1234/maven
-                      domain: https://index.docker.io/v1/
     - stage:
         name: deploy
         identifier: deploy
