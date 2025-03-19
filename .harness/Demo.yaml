@@ -12,6 +12,42 @@ pipeline:
         build: <+input>
   stages:
     - stage:
+        name: Sonarqube
+        identifier: Sonarqube
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: AKS
+              namespace: maven-app
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Sonarqube
+                  name: Sonarqube_1
+                  identifier: Sonarqube_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+                    auth:
+                      access_token: sqp_180e2bf02583dbe4d96a145c05ff3d2a4ee44dca
+                      domain: http://devopsfreeuse.eastus.cloudapp.azure.com:9000/
+                      ssl: true
+                    tool:
+                      project_key: maven
+    - stage:
         name: Build
         identifier: Build
         description: ""
