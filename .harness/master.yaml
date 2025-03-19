@@ -1,0 +1,32 @@
+inputSet:
+  name: master
+  identifier: master
+  orgIdentifier: default
+  projectIdentifier: Devopsnow
+  pipeline:
+    identifier: Demo
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
+    stages:
+      - stage:
+          identifier: deploy
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Kubernetes
+                  spec:
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: dockerhub
+                        sources:
+                          - identifier: dockerhub
+                            type: DockerRegistry
+                            spec:
+                              tag: latest
