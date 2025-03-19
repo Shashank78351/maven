@@ -69,7 +69,7 @@ pipeline:
                       log:
                         level: info
                       args:
-                        cli: "--scanner vuln"
+                        cli: "--scanners vuln"
                     privileged: true
                     imagePullPolicy: Always
                     connectorRef: docker
