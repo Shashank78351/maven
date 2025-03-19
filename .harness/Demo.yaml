@@ -39,12 +39,12 @@ pipeline:
                       - latest
                     caching: true
     - stage:
-        name: test
+        name: Trivy scan
         identifier: test
         description: ""
         type: CI
         spec:
-          cloneCodebase: true
+          cloneCodebase: false
           infrastructure:
             type: KubernetesDirect
             spec:
@@ -68,6 +68,8 @@ pipeline:
                     advanced:
                       log:
                         level: info
+                      args:
+                        cli: "--scanner vuln"
                     privileged: true
                     imagePullPolicy: Always
                     connectorRef: docker
@@ -76,6 +78,11 @@ pipeline:
                       type: docker_v2
                       tag: latest
                       name: smr1234/maven
+          caching:
+            enabled: false
+            paths: []
+          buildIntelligence:
+            enabled: false
     - stage:
         name: deploy
         identifier: deploy
