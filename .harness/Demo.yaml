@@ -39,12 +39,14 @@ pipeline:
                       ssl: true
                     tool:
                       project_key: maven
-          platform:
-            os: Linux
-            arch: Arm64
-          runtime:
-            type: Docker
-            spec: {}
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: AKS
+              namespace: maven-app
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
     - stage:
         name: Build
         identifier: Build
