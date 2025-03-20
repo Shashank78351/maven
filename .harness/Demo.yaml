@@ -18,14 +18,6 @@ pipeline:
         type: CI
         spec:
           cloneCodebase: true
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: AKS
-              namespace: maven-app
-              automountServiceAccountToken: true
-              nodeSelector: {}
-              os: Linux
           execution:
             steps:
               - step:
@@ -47,6 +39,12 @@ pipeline:
                       ssl: true
                     tool:
                       project_key: maven
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Docker
+            spec: {}
     - stage:
         name: Build
         identifier: Build
