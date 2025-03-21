@@ -35,8 +35,8 @@ pipeline:
                         level: info
                     auth:
                       access_token: sqp_180e2bf02583dbe4d96a145c05ff3d2a4ee44dca
-                      domain: http://devopsfreeuse.eastus.cloudapp.azure.com:9000/
-                      ssl: true
+                      domain: http://devopsfreeuse.eastus.cloudapp.azure.com:9000
+                      ssl: false
                     tool:
                       project_key: maven
           infrastructure:
